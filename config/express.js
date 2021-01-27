@@ -12,7 +12,7 @@ function setupExpress(app) {
 
     app.use(express.urlencoded({
         extended: true
-    }));
+    }));            
 }
 
 module.exports = setupExpress;
