@@ -1,6 +1,3 @@
-const fs = require('fs').promises;
-const path = require('path');
-const filePath = path.join(__dirname, '../config/products.json');
 const productsDB = require('../config/products.json');
 
 module.exports = {
@@ -13,7 +10,6 @@ module.exports = {
     },
     
     create(product) {
-        productsDB.push(product);
-        return fs.writeFile(filePath, JSON.stringify(productsDB));
+       
     }
 }
