@@ -21,7 +21,7 @@ const cubeSchema = new mongoose.Schema({
     min: 1,
     max: 6,
   },
-  acessories: [
+  accessories: [
     {
       type: mongoose.Types.ObjectId,
       ref: "Accessory",
