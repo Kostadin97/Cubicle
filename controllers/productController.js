@@ -5,8 +5,12 @@ const validateProduct = require("../middlewares/validateInput");
 const router = Router();
 
 router.get("/", (req, res) => {
-  let products = productService.getAll(req.query);
-  res.render("home", { title: "Browse", products });
+  productService
+    .getAll(req.query)
+    .then((products) => {
+      res.render("home", { title: "Browse", products });
+    })
+    .catch(() => res.status(500).end());
 });
 
 router.get("/create", (req, res) => {
@@ -20,8 +24,8 @@ router.post("/create", validateProduct, (req, res) => {
     .catch((err) => res.status(500).end());
 });
 
-router.get("/details/:productId", (req, res) => {
-  let product = productService.getOne(req.params.productId);
+router.get("/details/:productId", async (req, res) => {
+  let product = await productService.getOne(req.params.productId)
   res.render("details", { title: "Product Details", product });
 });
 
