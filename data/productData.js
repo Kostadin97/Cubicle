@@ -8,8 +8,4 @@ module.exports = {
     getOne(id) {
         return productsDB.find(x => x.id == id);
     },
-    
-    create(product) {
-       
-    }
 }
