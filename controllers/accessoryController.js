@@ -11,7 +11,7 @@ router.get('/create', (req, res) => {
 router.post('/create', (req, res) => {
     accessoryService.create(req.body)
         .then(() => {
-            res.redirect('/products');
+            res.redirect('/');
         })
         .catch((err) => console.log(err));
 

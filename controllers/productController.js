@@ -5,6 +5,7 @@ const validateProduct = require("../middlewares/validateInput");
 
 const router = Router();
 
+
 router.get('/', (req, res) => {
   productService
     .getAll(req.query)
@@ -21,7 +22,7 @@ router.get('/create', (req, res) => {
 router.post('/create', validateProduct, (req, res) => {
   productService
     .create(req.body)
-    .then(() => res.redirect('/products'))
+    .then(() => res.redirect('/'))
     .catch(() => res.status(500).end());
 });
 
@@ -41,9 +42,13 @@ router.get('/:productId/attach', async (req, res) => {
 router.post('/:productId/attach', (req, res) => {
   productService.attachAccessory(req.params.productId, req.body.accessory)
     .then(() => {
-      res.redirect(`/products/details/${req.params.productId}`);
+      res.redirect(`/details/${req.params.productId}`);
     })
     .catch(() => res.status(500).end());
+});
+
+router.get('/about', (req, res) => {
+  res.render('about', { title: 'About' });
 });
 
 module.exports = router;
