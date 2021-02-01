@@ -26,6 +26,33 @@ router.post('/create', validateProduct, (req, res) => {
     .catch(() => res.status(500).end());
 });
 
+router.get('/edit/:productId', async (req, res) => {
+  let product = await productService.getOne(req.params.productId);
+  let difficultyLevel;
+
+  if (product.difficultyLevel == 1) {
+    difficultyLevel = 'Very Easy';
+  }else if (product.difficultyLevel == 2) {
+    difficultyLevel = 'Easy';
+  }else if (product.difficultyLevel == 3) {
+    difficultyLevel = 'Medium';
+  }else if (product.difficultyLevel == 4) {
+    difficultyLevel = 'Intermediate';
+  }else if (product.difficultyLevel == 5) {
+    difficultyLevel = 'Expert';
+  }else if (product.difficultyLevel == 6) {
+    difficultyLevel = 'Hardcore';
+  }
+
+  res.render('edit', { title: 'Edit', product, difficultyLevel });
+});
+
+router.post('/edit/:productId', (req, res) => {
+  productService.edit(req.params.productId, req.body)
+    .then(() => res.redirect(`/details/${req.params.productId}`))
+    .catch(() => res.status(500).end());
+});
+
 router.get('/details/:productId', async (req, res) => {
   let product = await productService.getOneWithAccessories(req.params.productId)
 

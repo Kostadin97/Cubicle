@@ -4,6 +4,7 @@ module.exports = (app) => {
   mongoose.connect('mongodb://localhost:27017/cubicle', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 
   const db = mongoose.connection;
