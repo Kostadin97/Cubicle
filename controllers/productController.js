@@ -7,12 +7,13 @@ const router = Router();
 
 
 router.get('/', (req, res) => {
-  productService
-    .getAll(req.query)
-    .then((products) => {
-      res.render('home', { title: 'Browse', products });
-    })
-    .catch(() => res.status(500).end());
+  // productService
+  //   .getAll(req.query)
+  //   .then((products) => {
+  //     res.render('home', { title: 'Browse', products });
+  //   })
+  //   .catch(() => res.status(500).end());
+  res.render('home');
 });
 
 router.get('/create', (req, res) => {
