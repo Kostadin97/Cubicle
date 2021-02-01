@@ -22,7 +22,7 @@ router.post('/create', validateProduct, (req, res) => {
   productService
     .create(req.body)
     .then(() => res.redirect('/products'))
-    .catch((err) => res.status(500).end());
+    .catch(() => res.status(500).end());
 });
 
 router.get('/details/:productId', async (req, res) => {
@@ -43,7 +43,7 @@ router.post('/:productId/attach', (req, res) => {
     .then(() => {
       res.redirect(`/products/details/${req.params.productId}`);
     })
-    .catch((err) => console.log(err));
+    .catch(() => res.status(500).end());
 });
 
 module.exports = router;
