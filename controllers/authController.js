@@ -12,9 +12,10 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     const { username, password, repeatPassword} = req.body;
+    const passwordMessage = 'Passwords must be the same!';
 
     if (password !== repeatPassword) {
-        return res.render('register', { message: 'Passwords must be the same!' });
+        return res.render('register', { error: passwordMessage });
     }
 
     try {
@@ -22,8 +23,21 @@ router.post('/register', async (req, res) => {
         
         res.redirect('/auth/login');
     } catch (error) {
-        res.render('register', { title: 'Register Page', error });
+        res.render('register', { title: 'Register Page', error: passwordMessage });
     }
 });
 
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        let token = await authService.login({ username, password });
+        res.cookie('USER_SESSION', token);
+        res.redirect('/');
+        
+    } catch (error) {
+        res.render('login', {error});
+    }
+
+});
 module.exports = router;
