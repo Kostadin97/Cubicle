@@ -1,22 +1,21 @@
-const jwt = require('jsonwebtoken');
-const cookieName = 'USER_SESSION';
-const secret = 'navcho';
+const jwt = require("jsonwebtoken");
+const cookieName = "USER_SESSION";
+const secret = "navcho";
 
-module.exports = function() {
-    return (req, res, next) => {
-        let token = req.cookies(cookieName);
-        if (token) {
-            //verify token
-            jwt.verify(token, secret, (err, encoded) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log(decoded);
-            })
-                
-
+module.exports = function () {
+  return (req, res, next) => {
+    let token = req.cookies[cookieName];
+    if (token) {
+      jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+          res.clearCookie(cookieName);
+        } else {
+          req.user = decoded;
+          res.locals.user = decoded;
+          res.locals.isAuthenticated = true;
         }
-        
-        next();
+      });
     }
-}
+    next();
+  };
+};
