@@ -57,6 +57,12 @@ router.post('/edit/:productId', (req, res) => {
     .catch(() => res.status(500).end());
 });
 
+router.get('/delete/:productId', (req, res) => {
+  productService.deleteProduct(req.params.productId)
+    .then(() => res.redirect('/'))
+    .catch(() => res.status(500).end());
+});
+
 router.get('/details/:productId', async (req, res) => {
   let product = await productService.getOneWithAccessories(req.params.productId)
 
