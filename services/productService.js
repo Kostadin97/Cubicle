@@ -9,11 +9,11 @@ async function getAll(query) {
     }
 
     if (query.from) {
-        products = products.filter(x => Number(x.level) >= query.from);
+        products = products.filter(x => Number(x.difficultyLevel) >= query.from);
     }
 
     if (query.to) {
-        products = products.filter(x => Number(x.level) <= query.to);
+        products = products.filter(x => Number(x.difficultyLevel) <= query.to);
     }
 
     return products;
