@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const secret = 'navcho';
 
+const saltRounds = 10;
+
 const register = async ({ username, password }) => {
   let salt = await bcrypt.genSalt(saltRounds);
   let hash = await bcrypt.hash(password, salt);
