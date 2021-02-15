@@ -10,7 +10,7 @@ const register = async ({ username, password }) => {
   let hash = await bcrypt.hash(password, salt);
 
   const user = new User({ username, password: hash });
-  return await user.save();x
+  return await user.save();
 };
 
 const login = async ({ username, password }) => {
