@@ -19,7 +19,7 @@ router.post("/register", isGuest, async (req, res) => {
   const passwordMessage = "Passwords must be the same!";
 
   if (password !== repeatPassword) {
-    return res.render("register", { error: passwordMessage });
+    return res.render("register", { title: "Register Page", error: passwordMessage });
   }
 
   try {
@@ -35,7 +35,7 @@ router.post("/login", isGuest, async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    let token = await authService.login({ username, password });
+    let token = await authService.login({ title: "Login Page", username, password });
     res.cookie(cookieName, token);
     res.redirect("/");
   } catch (error) {
