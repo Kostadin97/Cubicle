@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 module.exports = (app) => {
-  mongoose.connect('mongodb://localhost:27017/cubicle', {
+  mongoose.connect('mongodb+srv://admin:admin@cluster.6ztzo.mongodb.net/cubicle?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
